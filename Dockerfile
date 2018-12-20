@@ -3,9 +3,9 @@ LABEL maintainer="Hitesh Prabhakar <HP41@github>"
 LABEL description="PaperCut MF Application Server"
 
 ENV PAPERCUT_MAJOR_VER 18.x
-ENV PAPERCUT_VER 18.0.4
+ENV PAPERCUT_VER 
 ENV PAPERCUT_DOWNLOAD_URL https://cdn.papercut.com/files/mf/${PAPERCUT_MAJOR_VER}/pcmf-setup-${PAPERCUT_VER}-linux-x64.sh
-
+18.3.4
 COPY entrypoint.sh /
 
 RUN \
