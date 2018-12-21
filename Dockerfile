@@ -1,40 +1,16 @@
-FROM ubuntu:xenial
-LABEL maintainer="Hitesh Prabhakar <HP41@github>"
+FROM hp41/papercut-mf 
+LABEL maintainer="Thomas Stägemann <staegi@github>"
 LABEL description="PaperCut MF Application Server"
 
-ENV PAPERCUT_MAJOR_VER 18.x
-ENV PAPERCUT_VER 
-ENV PAPERCUT_DOWNLOAD_URL https://cdn.papercut.com/files/mf/${PAPERCUT_MAJOR_VER}/pcmf-setup-${PAPERCUT_VER}-linux-x64.sh
-18.3.4
-COPY entrypoint.sh /
+ENV MYSQL_CONNECTOR_VERSION 8.0.13
+ENV MYSQL_CONNECTOR_DOWNLOAD_URL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.tar.gz
 
-RUN \
-# Creating 'papercut' user
-    useradd -mUd /papercut -s /bin/bash papercut && \
-    chmod +x /entrypoint.sh && \
+# Downloading and installing MySQL connector 
+RUN curl -L "${MYSQL_CONNECTOR_DOWNLOAD_URL}" -o /tmp/mysql.tar.gz \
+	&& tar -xvzf /tmp/mysql.tar.gz -C /tmp/ \
+    && cp /tmp/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.jar /papercut/server/lib-ext/
 
-# Installing necessary pacakges and cleaning up
-    apt-get update && \
-    apt-get install -y \
-                    curl \
-                    cpio && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-
-# Downloading Papercut and ensuring it's executable
-    curl -L "${PAPERCUT_DOWNLOAD_URL}" -o /pcmf-setup.sh && \
-    chmod a+rx /pcmf-setup.sh && \
-
-# Running the installer as papercut user and running root tasks as root user
-    runuser -l papercut -c "/pcmf-setup.sh --non-interactive" && \
-    rm -f /pcmf-setup.sh && \
-    /papercut/MUST-RUN-AS-ROOT && \
-
-# Stopping Papercut services before capturing image
-    /etc/init.d/papercut stop && \
-    /etc/init.d/papercut-web-print stop
-
-VOLUME /papercut/server/logs /papercut/server/data/backups /papercut/server/data/conf /papercut/server/data/internal
-EXPOSE 9191 9192 9193
-
-ENTRYPOINT ["/entrypoint.sh"]
+# Create NFS mountable directory with symlinked properies file
+RUN mkdir -p /papercut/server/conf \
+    && mv /papercut/server/server.properties /papercut/server/conf/server.properties \
+    && ln -s /papercut/server/conf/server.properties /papercut/server/server.properties

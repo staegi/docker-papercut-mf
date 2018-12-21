@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+  papercut:
+      build: .
+      restart: always
+      depends_on:
+        - mysql 
+      links:
+        - mysql
+      ports:
+        - 9191:9191
+        - 9192:9192
+        - 9193:9193
+      volumes:
+        - papercut_database:/papercut/server/server/data/internal
+        - papercut_logs:/papercut/server/logs
+        - papercut_backups:/papercut/server/data/backups
+      environment:
+        PAPERCUT_DATABASE_HOST: mysql
+        PAPERCUT_DATABASE_NAME: papercut 
+        PAPERCUT_DATABASE_USER: papercut 
+        PAPERCUT_DATABASE_PASSWORD: papercut 
+  mysql:
+      image: mysql 
+      restart: always
+      ports:
+        - 3306:3306
+      environment:
+        MYSQL_ROOT_PASSWORD: papercut 
+        MYSQL_DATABASE: papercut 
+        MYSQL_USER: papercut 
+        MYSQL_PASSWORD: papercut 
+volumes:
+  papercut_database:
+  papercut_logs:
+  papercut_backups:
