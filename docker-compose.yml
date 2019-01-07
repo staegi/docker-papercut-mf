@@ -4,24 +4,26 @@ services:
       build: .
       restart: always
       depends_on:
-        - mysql 
-      links:
         - mysql
+      links:
+        - mysql:database
       ports:
         - 9191:9191
         - 9192:9192
         - 9193:9193
       volumes:
-        - papercut_database:/papercut/server/server/data/internal
         - papercut_logs:/papercut/server/logs
-        - papercut_backups:/papercut/server/data/backups
+        - papercut_data:/papercut/server/data
       environment:
-        PAPERCUT_DATABASE_HOST: mysql
-        PAPERCUT_DATABASE_NAME: papercut 
-        PAPERCUT_DATABASE_USER: papercut 
-        PAPERCUT_DATABASE_PASSWORD: papercut 
+        PAPERCUT_ADMIN_USERNAME: admin
+        PAPERCUT_ADMIN_PASSWORD: admin
+        PAPERCUT_DATABASE_TYPE: MySQL
+        PAPERCUT_DATABASE_DRIVER: com.mysql.cj.jdbc.Driver
+        PAPERCUT_DATABASE_USERNAME: papercut
+        PAPERCUT_DATABASE_PASSWORD: papercut
+        PAPERCUT_DATABASE_URL: jdbc:mysql://database/papercut
   mysql:
-      image: mysql 
+      image: mysql:5.7
       restart: always
       ports:
         - 3306:3306
@@ -29,8 +31,17 @@ services:
         MYSQL_ROOT_PASSWORD: papercut 
         MYSQL_DATABASE: papercut 
         MYSQL_USER: papercut 
-        MYSQL_PASSWORD: papercut 
+        MYSQL_PASSWORD: papercut
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      restart: always
+      depends_on:
+          - mysql
+      ports:
+          - 8080:80
+      environment:
+          MYSQL_ROOT_PASSWORD: papercut
+          PMA_HOST: mysql
 volumes:
-  papercut_database:
   papercut_logs:
-  papercut_backups:
+  papercut_data:

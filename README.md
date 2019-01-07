@@ -25,9 +25,20 @@ docker run -d \
     -p 9191:9191 \
     -p 9192:9193 \
     -p 9193:9193 \
-    -v /path/on/host/to/database:/papercut/server/server/data/internal \
+    -v /path/on/host/to/data:/papercut/server/data \
     -v /path/on/host/to/logs:/papercut/server/logs \
-    -v /path/on/host/to/conf:/papercut/server/conf \
-    -v /path/on/host/to/backups:/papercut/server/data/backups \
     tomcat2111/papercut-mf
 ```
+
+## Environement Variables
+
+    Variable name              | Default  | MySQL 
+    -----------------------------------------------------------------------
+    PAPERCUT_ADMIN_USERNAME    | admin    | 
+    PAPERCUT_ADMIN_PASSWORD    | papercut |
+    PAPERCUT_REPORTS_LABEL     | Local    |
+    PAPERCUT_DATABASE_TYPE     | Internal | MySQL
+    PAPERCUT_DATABASE_DRIVER   |          | com.mysql.cj.jdbc.Driver 
+    PAPERCUT_DATABASE_USERNAME |          |
+    PAPERCUT_DATABASE_PASSWORD |          |  
+    PAPERCUT_DATABASE_URL      |          | jdbc:mysql://database/papercut
