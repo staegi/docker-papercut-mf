@@ -32,13 +32,14 @@ docker run -d \
 
 ## Environement Variables
 
-    Variable name              | Default  | MySQL 
+    Variable name                                      | Default  | MySQL 
     -----------------------------------------------------------------------
-    PAPERCUT_ADMIN_USERNAME    | admin    | 
-    PAPERCUT_ADMIN_PASSWORD    | papercut |
-    PAPERCUT_REPORTS_LABEL     | Local    |
-    PAPERCUT_DATABASE_TYPE     | Internal | MySQL
-    PAPERCUT_DATABASE_DRIVER   |          | com.mysql.cj.jdbc.Driver 
-    PAPERCUT_DATABASE_USERNAME |          |
-    PAPERCUT_DATABASE_PASSWORD |          |  
-    PAPERCUT_DATABASE_URL      |          | jdbc:mysql://database/papercut
+    PAPERCUT_ADMIN_USERNAME                            | admin    | 
+    PAPERCUT_ADMIN_PASSWORD                            | papercut |
+    PAPERCUT_REPORTS_LABEL                             | Local    |
+    PAPERCUT_DATABASE_TYPE                             | Internal | MySQL
+    PAPERCUT_DATABASE_URL                              |          | jdbc:mysql://database/papercut
+    PAPERCUT_DATABASE_DRIVER                           |          | com.mysql.cj.jdbc.Driver 
+    PAPERCUT_DATABASE_USERNAME                         |          |
+    PAPERCUT_DATABASE_PASSWORD                         |          |  
+    PAPERCUT_SERVER_CSRF_CHECK_VALIDATE_REQUEST_ORIGIN | Y        |

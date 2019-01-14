@@ -1,5 +1,6 @@
 admin.username=${PAPERCUT_ADMIN_USERNAME:=admin}
 admin.password=${PAPERCUT_ADMIN_PASSWORD:=papercut}
+server.csrf-check.validate-request-origin=${PAPERCUT_SERVER_CSRF_CHECK_VALIDATE_REQUEST_ORIGIN:=Y}
 server.enable-http-on-port-80=N
 server.enable-https-on-port-443=N
 server.port=9191
