@@ -21,12 +21,13 @@ RUN runuser -l papercut -c "/pcmf-setup.sh --non-interactive" && rm -f /pcmf-set
 # Stopping Papercut services before capturing image
 RUN /etc/init.d/papercut stop && /etc/init.d/papercut-web-print stop
 
-VOLUME /papercut/server/logs /papercut/server/data
+WORKDIR /papercut
+VOLUME /papercut/server/data /papercut/server/custom /papercut/server/logs
 EXPOSE 9191 9192 9193
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Downloading and installing MySQL connector
-ENV MYSQL_CONNECTOR_VERSION 8.0.13
+ENV MYSQL_CONNECTOR_VERSION 8.0.17
 ENV MYSQL_CONNECTOR_DOWNLOAD_URL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_CONNECTOR_VERSION}.tar.gz
 
 RUN curl -L "${MYSQL_CONNECTOR_DOWNLOAD_URL}" -o /mysql.tar.gz \
