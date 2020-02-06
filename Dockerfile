@@ -3,7 +3,7 @@ LABEL maintainer="Thomas Stägemann <staegi@github>"
 LABEL description="PaperCut MF Application Server"
 
 ENV PAPERCUT_MAJOR_VER 19.x
-ENV PAPERCUT_VER 19.1.2.52029
+ENV PAPERCUT_VER 19.1.3.52103
 ENV PAPERCUT_DOWNLOAD_URL https://cdn1.papercut.com/web/products/ng-mf/installers/mf/${PAPERCUT_MAJOR_VER}/pcmf-setup-${PAPERCUT_VER}.sh
 
 # Creating 'papercut' user
