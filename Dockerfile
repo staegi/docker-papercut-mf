@@ -2,15 +2,15 @@ FROM ubuntu:xenial
 LABEL maintainer="Thomas Stägemann <staegi@github>"
 LABEL description="PaperCut MF Application Server"
 
-ENV PAPERCUT_MAJOR_VER 19.x
-ENV PAPERCUT_VER 19.1.5.52403
-ENV PAPERCUT_DOWNLOAD_URL https://cdn1.papercut.com/web/products/ng-mf/installers/mf/${PAPERCUT_MAJOR_VER}/pcmf-setup-${PAPERCUT_VER}.sh
-
 # Creating 'papercut' user
 RUN useradd -mUd /papercut -s /bin/bash papercut
 
 # Installing necessary pacakges and cleaning up
-RUN apt-get update && apt-get install -y curl cpio && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl cpio cups && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV PAPERCUT_MAJOR_VER 19.x
+ENV PAPERCUT_VER 19.1.5.52403
+ENV PAPERCUT_DOWNLOAD_URL https://cdn1.papercut.com/web/products/ng-mf/installers/mf/${PAPERCUT_MAJOR_VER}/pcmf-setup-${PAPERCUT_VER}.sh
 
 # Downloading Papercut and ensuring it's executable
 RUN curl -L "${PAPERCUT_DOWNLOAD_URL}" -o /pcmf-setup.sh && chmod a+rx /pcmf-setup.sh
