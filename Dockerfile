@@ -9,7 +9,7 @@ RUN useradd -mUd /papercut -s /bin/bash papercut
 RUN apt-get update && apt-get install -y curl cpio cups && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV PAPERCUT_MAJOR_VER 19.x
-ENV PAPERCUT_VER 19.1.5.52403
+ENV PAPERCUT_VER 19.1.6.53125
 ENV PAPERCUT_DOWNLOAD_URL https://cdn1.papercut.com/web/products/ng-mf/installers/mf/${PAPERCUT_MAJOR_VER}/pcmf-setup-${PAPERCUT_VER}.sh
 
 # Downloading Papercut and ensuring it's executable
