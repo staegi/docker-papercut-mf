@@ -25,9 +25,11 @@ docker run -d \
     -p 9191:9191 \
     -p 9192:9193 \
     -p 9193:9193 \
-    -v /path/on/host/to/data:/papercut/server/data \
+    -v /path/on/host/to/conf:/papercut/server/data/conf \
     -v /path/on/host/to/logs:/papercut/server/logs \
     -v /path/on/host/to/custom:/papercut/server/custom \
+    -v /path/on/host/to/backups:/papercut/server/data/backups \
+    -v /path/on/host/to/archive:/papercut/server/data/archive \
     tomcat2111/papercut-mf
 ```
 

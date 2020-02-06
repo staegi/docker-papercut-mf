@@ -13,8 +13,10 @@ services:
         - 9193:9193
       volumes:
         - papercut_logs:/papercut/server/logs
-        - papercut_data:/papercut/server/data
+        - papercut_conf:/papercut/server/data/conf
         - papercut_custom:/papercut/server/custom
+        - papercut_backups:/papercut/server/data/backups
+        - papercut_archive:/papercut/server/data/archive
       environment:
         PAPERCUT_ADMIN_USERNAME: admin
         PAPERCUT_ADMIN_PASSWORD: admin
@@ -45,5 +47,7 @@ services:
           PMA_HOST: mysql
 volumes:
   papercut_logs:
-  papercut_data:
+  papercut_conf:
   papercut_custom:
+  papercut_backups:
+  papercut_archive:

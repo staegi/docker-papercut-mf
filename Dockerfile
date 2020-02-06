@@ -22,7 +22,7 @@ RUN runuser -l papercut -c "/pcmf-setup.sh --non-interactive" && rm -f /pcmf-set
 RUN /etc/init.d/papercut stop && /etc/init.d/papercut-web-print stop
 
 WORKDIR /papercut
-VOLUME /papercut/server/data /papercut/server/custom /papercut/server/logs
+VOLUME /papercut/server/data/conf /papercut/server/custom /papercut/server/logs /papercut/server/data/backups /papercut/server/data/archive
 EXPOSE 9191 9192 9193
 ENTRYPOINT ["/entrypoint.sh"]
 
