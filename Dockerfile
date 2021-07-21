@@ -25,6 +25,7 @@ WORKDIR /papercut
 VOLUME /papercut/server/data/conf /papercut/server/custom /papercut/server/logs /papercut/server/data/backups /papercut/server/data/archive
 EXPOSE 9191 9192 9193
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/backup-license.sh"]
 
 # Downloading and installing MySQL connector
 ENV MYSQL_CONNECTOR_VERSION 8.0.17
@@ -42,5 +43,6 @@ RUN curl -L "${ENVSUBST_DOWNLOAD_URL}" -o /usr/local/bin/envsubst
 RUN chmod +x /usr/local/bin/envsubst
 
 COPY server.properties.template /
+COPY backup-license.sh /
 COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /backup-license.sh /entrypoint.sh

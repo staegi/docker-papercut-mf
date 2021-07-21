@@ -23,6 +23,15 @@ if [[ -x /etc/init.d/papercut ]]; then
         echo `runuser -l papercut -c "/papercut/server/bin/linux-x64/db-tools import-db -q -f /papercut/import.zip"`
     fi
 
+    # Copy license file from backup 
+    if [[ -f /papercut/server/data/conf/application.license ]]; then
+        echo "Restore license file"
+        runuser -p papercut -c "cp /papercut/server/data/conf/application.license /papercut/server/application.license"
+    fi
+
+    echo "Run license backup script in background"
+    exec /backup-license.sh &
+
     echo "Starting Papercut service in console"
     exec /etc/init.d/papercut console
 else
