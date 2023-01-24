@@ -46,3 +46,10 @@ docker run -d \
     PAPERCUT_DATABASE_USERNAME                         |          |
     PAPERCUT_DATABASE_PASSWORD                         |          |  
     PAPERCUT_SERVER_CSRF_CHECK_VALIDATE_REQUEST_ORIGIN | Y        |
+
+## Deployment
+
+    docker build -t tomcat2111/papercut-mf --platform linux/x86_64 .
+    docker tag tomcat2111/papercut-mf:latest tomcat2111/papercut-mf:[version_tag]
+    docker pull tomcat2111/papercut-mf:[version_tag] 
+    docker pull tomcat2111/papercut-mf:latest 
