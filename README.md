@@ -51,5 +51,5 @@ docker run -d \
 
     docker build -t tomcat2111/papercut-mf --platform linux/x86_64 .
     docker tag tomcat2111/papercut-mf:latest tomcat2111/papercut-mf:[version_tag]
-    docker pull tomcat2111/papercut-mf:[version_tag] 
-    docker pull tomcat2111/papercut-mf:latest 
+    docker push tomcat2111/papercut-mf:[version_tag] 
+    docker push tomcat2111/papercut-mf:latest 
