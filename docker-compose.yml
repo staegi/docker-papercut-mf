@@ -27,26 +27,28 @@ services:
         PAPERCUT_DATABASE_PASSWORD: papercut
         PAPERCUT_DATABASE_URL: jdbc:mysql://database:3306/papercut?useSSL=false
   mysql:
-      image: mysql:5.7
+      image: mysql:5.7.42
       restart: always
       platform: linux/x86_64
       ports:
         - 3306:3306
       environment:
-        MYSQL_ROOT_PASSWORD: papercut 
+        MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: papercut 
         MYSQL_USER: papercut 
         MYSQL_PASSWORD: papercut
   phpmyadmin:
-      image: phpmyadmin:5.2.0
+      image: phpmyadmin:5.2.1
       restart: always
       depends_on:
           - mysql
+      links:
+        - mysql:database
       ports:
           - 8080:80
       environment:
-          MYSQL_ROOT_PASSWORD: papercut
-          PMA_HOST: mysql
+          MYSQL_ROOT_PASSWORD: root
+          PMA_HOST: database
 volumes:
   papercut_logs:
   papercut_conf:
