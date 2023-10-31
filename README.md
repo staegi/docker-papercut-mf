@@ -19,6 +19,12 @@ PaperCut MF for Docker
 
 -------
 
+## Run a stack on your local machine
+
+This will launch a mysql server, phpMyAdmin and Papercut:
+
+    docker compose up -d
+
 ## docker run example
 ```bash
 docker run -d \
